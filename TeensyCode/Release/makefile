@@ -64,10 +64,10 @@ AR += \
 C:\Users\Editor\OneDrive\Documents\School\GCU\CST452\TeensyCode\Release\arduino.ar \
 
 ELF += \
-CT3680TestPlatform.elf \
+CT3680TestPlatformFirmward.elf \
 
 HEX += \
-CT3680TestPlatform.hex \
+CT3680TestPlatformFirmward.hex \
 
 
 
@@ -94,13 +94,13 @@ uploadWithProgrammerWithoutBuild:
 	${tools.${program.tool}.program.pattern}
 
 # All Target
-all: CT3680TestPlatform
+all: CT3680TestPlatformFirmward
 
 # Tool invocations
-CT3680TestPlatform: $(HEX)
+CT3680TestPlatformFirmward: $(HEX)
 	@echo 'Building target: $@'
 	@echo 'Printing size:'
-	"C:\Sloeber\arduinoPlugin\packages\teensy\tools\teensy-compile\11.3.1/arm/bin/arm-none-eabi-size" -A "C:\Users\Editor\OneDrive\Documents\School\GCU\CST452\TeensyCode\Release/CT3680TestPlatform.elf"
+	"C:\Sloeber\arduinoPlugin\packages\teensy\tools\teensy-compile\11.3.1/arm/bin/arm-none-eabi-size" -A "C:\Users\Editor\OneDrive\Documents\School\GCU\CST452\TeensyCode\Release/CT3680TestPlatformFirmward.elf"
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -110,13 +110,13 @@ C:\Users\Editor\OneDrive\Documents\School\GCU\CST452\TeensyCode\Release\arduino.
 	@echo 'Finished building: $@'
 	@echo ' '
 
-CT3680TestPlatform.elf: $(LINK_OBJ) $(AR)
+CT3680TestPlatformFirmward.elf: $(LINK_OBJ) $(AR)
 	@echo 'Starting combiner'
-	"C:\Sloeber\arduinoPlugin\packages\teensy\tools\teensy-compile\11.3.1/arm/bin/arm-none-eabi-gcc" -O2 -Wl,--gc-sections,--relax "-TC:/Sloeber/arduinoPlugin/packages/teensy/hardware/avr/1.59.0/cores/teensy4/imxrt1062_t41.ld"  -mthumb -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -o "C:\Users\Editor\OneDrive\Documents\School\GCU\CST452\TeensyCode\Release/CT3680TestPlatform.elf"  $(LINK_OBJ) $(AR) "-LC:\Users\Editor\OneDrive\Documents\School\GCU\CST452\TeensyCode\Release" -larm_cortexM7lfsp_math -lm -lstdc++
+	"C:\Sloeber\arduinoPlugin\packages\teensy\tools\teensy-compile\11.3.1/arm/bin/arm-none-eabi-gcc" -O2 -Wl,--gc-sections,--relax "-TC:/Sloeber/arduinoPlugin/packages/teensy/hardware/avr/1.59.0/cores/teensy4/imxrt1062_t41.ld"  -mthumb -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -o "C:\Users\Editor\OneDrive\Documents\School\GCU\CST452\TeensyCode\Release/CT3680TestPlatformFirmward.elf"  $(LINK_OBJ) $(AR) "-LC:\Users\Editor\OneDrive\Documents\School\GCU\CST452\TeensyCode\Release" -larm_cortexM7lfsp_math -lm -lstdc++
 	@echo 'Finished building: $@'
 	@echo ' '
 
-CT3680TestPlatform.hex: $(ELF)
+CT3680TestPlatformFirmward.hex: $(ELF)
 	@echo 'Do all objcopy commands'
 	${recipe.objcopy.eep.pattern}
 	${recipe.objcopy.hex.pattern}

@@ -24,6 +24,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatform/libraries/Wire/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatform/libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatform/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatformFirmward/libraries/Wire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatformFirmward/libraries/LiquidCrystal_I2C}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatformFirmward/libraries/Wire/utility}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.cpp.sketch.input.37917214" name="CPP source files" superClass="io.sloeber.compiler.cpp.sketch.input"/>
 							</tool>
@@ -34,6 +37,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatform/libraries/Wire/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatform/libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatform/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatformFirmward/libraries/Wire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatformFirmward/libraries/LiquidCrystal_I2C}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatformFirmward/libraries/Wire/utility}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.c.sketch.input.1353167820" name="C Source Files" superClass="io.sloeber.compiler.c.sketch.input"/>
 							</tool>
@@ -44,6 +50,9 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatform/libraries/Wire/utility}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatform/libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatform/core/core}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatformFirmward/libraries/Wire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatformFirmward/libraries/LiquidCrystal_I2C}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CT3680TestPlatformFirmward/libraries/Wire/utility}&quot;"/>
 								</option>
 								<inputType id="io.sloeber.compiler.S.sketch.input.644214172" name="Assembly source files" superClass="io.sloeber.compiler.S.sketch.input"/>
 							</tool>

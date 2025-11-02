@@ -2,7 +2,7 @@
 //This is a automatic generated file
 //Please do not modify this file
 //If you touch this file your change will be overwritten during the next build
-//This file has been generated on 2025-10-30 22:25:45
+//This file has been generated on 2025-11-02 13:34:07
 
 #include "Arduino.h"
 #include "Arduino.h"
@@ -21,7 +21,7 @@ void getModuleSN(char * buff) ;
 void readModuleDiag() ;
 void loop() ;
 
-#include "CT3680TestPlatform.ino"
 
+#include "CT3680TestPlatform.ino"
 
 #endif
