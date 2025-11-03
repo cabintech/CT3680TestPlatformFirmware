@@ -454,6 +454,7 @@ void loop()
 	    	else if (strcmp(buffer, POWER_OFF) == 0) {
 	    		relayPower(false);
 	    	}
+	    	//will add more commands here for each of the testing procedures
 	  }
 
 
