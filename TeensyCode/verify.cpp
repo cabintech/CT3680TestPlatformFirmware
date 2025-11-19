@@ -247,8 +247,17 @@ void verifyTapTempo() {
 
 //not yet coded
 void verifyVCSettings() {
+
+	analogWrite(PIN_CV_D1, 0);
+	analogWrite(PIN_CV_D2, 0);
+	analogWrite(PIN_CV_D3, 0);
+	analogWrite(PIN_CV_D4, 0);
+	analogWrite(PIN_CV_MIN, 0);
+	analogWrite(PIN_CV_MAX, 0);
+
+
 	int testPin;
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 6; i++) {
 		switch (i) {
 		case 0: {
 			testPin = PIN_CV_D1;
@@ -267,11 +276,11 @@ void verifyVCSettings() {
 			break;
 		}
 		case 4: {
-			testPin = PIN_CV_MAX;
+			testPin = PIN_CV_MIN;
 			break;
 		}
 		case 5: {
-			testPin = PIN_CV_MIN;
+			testPin = PIN_CV_MAX;
 			break;
 		}
 		default: {
@@ -279,25 +288,70 @@ void verifyVCSettings() {
 		}
 		}
 
+	struct CVData cvData;
+
 	analogWrite(testPin, 0);
 	delay(500);
+	getCV(&cvData);
 
-	byte buff[DIAG_MAX_BYTES];
-	readModuleDiag(buff);
+	for (int cv=0; cv<6; cv++) { // check that all 6 CVs are set at 0.0V
+		if ((cvData.volts[cv] < -0.1) || (cvData.volts[cv] > 0.1)) {
+			sprintf(errorMsg, "SET CV 0.0v failed, expected all CVs at 0.0V, CV%i read at %f", cv+1, cvData.volts[cv]);
+			return;
+		}
+	}
 
-
+	//byte buff[DIAG_MAX_BYTES];
+	//readModuleDiag(buff); ***** done in getCV
 
 	analogWrite(testPin, 255/2); // Write 50% of maximum 3.3v, e.g. 1.65v
 	delay(500); // PWM-to-analog converter takes a long time to settle on the target voltage
+	getCV(&cvData);
+
+	for (int cv=0; cv<6; cv++) { // check that all other CVs are set at 0.0V, CV under test at 1.65v
+		if (cv != i) {
+			if ((cvData.volts[cv] < -0.1) || (cvData.volts[cv] > 0.1)) {
+				sprintf(errorMsg, "SET CV%i 1.65V failed, expected all other CVs at 0.0V, CV%i read at %f", i+1, cv+1, cvData.volts[cv]);
+				return;
+			}
+		}
+		else if ((cvData.volts[cv] < 1.55) || (cvData.volts[cv] > 1.75)) {
+			sprintf(errorMsg, "SET CV 1.65V failed, CV%i read at %f", cv+1, cvData.volts[cv]);
+			return;
+		}
+	}
 
 	analogWrite(testPin, 255);
 	delay(500);
 
+	getCV(&cvData);
+
+	for (int cv=0; cv<6; cv++) { // check that all other CVs are set at 0.0V, CV under test at 1.65v
+		if (cv != i) {
+			if ((cvData.volts[cv] < -0.1) || (cvData.volts[cv] > 0.1)) {
+				sprintf(errorMsg, "SET CV 3.3V failed, expected all other CVs at 0.0V, CV%i read at %f", cv+1, cvData.volts[cv]);
+				return;
+			}
+		}
+		else if ((cvData.volts[cv] < 3.2) || (cvData.volts[cv] > 3.4)) {
+			sprintf(errorMsg, "SET CV 3.3V failed, CV%i read at %f", cv+1, cvData.volts[cv]);
+			return;
+		}
+	}
+
 	// Read CV back from the module data stream
-	struct CVData cvMin;
-	getCV("CV_MIN", &cvMin);
+
+	//getCV("CV_MIN", &cvMin);
 
 	// Return results
 	//sendResponse("CV is: values(%i) percent(%f) volts(%f)", cvMin.value, cvMin.percent, cvMin.volts);
-	analogWrite(PIN_CV_MIN, 0); // Restore to 0.0v
+	analogWrite(testPin, 0); // Restore to 0.0v
 }}
+
+void verifyAudio() {
+
+}
+
+void verifyMemory() {
+
+}

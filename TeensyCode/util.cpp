@@ -326,6 +326,7 @@ void getModuleSN(char *buff) {
 		if (Wire.available()) {
 			status[i] = Wire.read();
 		} else {
+			Serial.println("Not available");
 			status[i] = 0;
 		}
 	}
@@ -333,6 +334,12 @@ void getModuleSN(char *buff) {
 	// Format results into caller-supplied buffer
 	snprintf(buff, 11, "0X%02x%02x%02x%02x", status[11], status[10], status[9],
 			status[8]);
+
+	Serial.print("Module SN: ");
+	Serial.print(status[11]);
+	Serial.print(status[10]);
+	Serial.print(status[9]);
+	Serial.println(status[8]);
 
 	// Return FXCore to RUN mode
 	Wire.beginTransmission(0x30);
@@ -355,8 +362,8 @@ void getModuleSN(char *buff) {
  */
 void fillInCVData(struct CVData *cvData, int cvVal, int ind) {
 	cvData->values[ind] = cvVal; // FXCore int value from 0 to 0x7FFFFFFF
-	//cvData->percent[ind] = (float)cvData->values / 0x7FFFFFFF; // Ratio (percentage) of maximum value
-	//cvData->volts[ind] = cvData->percent * 3.3; // Voltage in 0.0 to 3.3 range
+	cvData->percent[ind] = (float)cvVal / 0x7FFFFFFF; // Ratio (percentage) of maximum value
+	cvData->volts[ind] = cvData->percent[ind] * 3.3; // Voltage in 0.0 to 3.3 range
 }
 
 void getCV(struct CVData *cvData) {
@@ -369,15 +376,28 @@ void getCV(struct CVData *cvData) {
 	int cv2 = reverseBytes(diag+DIAG_CV_2);
 	int cv3 = reverseBytes(diag+DIAG_CV_3);
 	int cv4 = reverseBytes(diag+DIAG_CV_4);
-	int max = reverseBytes(diag+DIAG_CV_MAX);
 	int min = reverseBytes(diag+DIAG_CV_MIN);
+	int max = reverseBytes(diag+DIAG_CV_MAX);
+
+//	Serial.print("cv1: ");
+//	Serial.print(cv1);
+//	Serial.print(" cv2: ");
+//	Serial.print(cv2);
+//	Serial.print(" cv3: ");
+//	Serial.print(cv3);
+//	Serial.print(" cv4: ");
+//	Serial.print(cv4);
+//	Serial.print(" min: ");
+//	Serial.print(min);
+//	Serial.print(" max: ");
+//	Serial.println(max);
 
 	fillInCVData(cvData, cv1, 0);
 	fillInCVData(cvData, cv2, 1);
 	fillInCVData(cvData, cv3, 2);
 	fillInCVData(cvData, cv4, 3);
-	fillInCVData(cvData, max, 4);
-	fillInCVData(cvData, min, 5);
+	fillInCVData(cvData, min, 4);
+	fillInCVData(cvData, max, 5);
 
 	return;
 }

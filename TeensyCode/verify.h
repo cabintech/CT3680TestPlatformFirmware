@@ -14,5 +14,7 @@ void verifyPGMSwitches();
 void verifySamplingRates();
 void verifyTapTempo();
 void verifyVCSettings();
+void verifyAudio();
+void verifyMemory();
 
 #endif /* VERIFY_H_ */

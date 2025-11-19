@@ -31,6 +31,6 @@ void readModuleDiag(byte *buff);
 bool checkForErrors();
 int reverseBytes(const byte *buff);
 float convertIntervalToMS(int interval, int rate);
-void getCV(const char * cvName, struct CVData *cvData);
+void getCV(struct CVData *cvData);
 
 #endif /* UTIL_H_ */

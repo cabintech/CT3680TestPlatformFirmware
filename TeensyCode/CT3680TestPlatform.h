@@ -73,10 +73,10 @@ const int sampleRates[] = { 12000, 24000, 32000, 48000 };
 
 const int DIAG_CV_MIN = 28;
 const int DIAG_CV_MAX = 32;
-const int DIAG_CV_1 = 36;
-const int DIAG_CV_2 = 40;
-const int DIAG_CV_3 = 44;
-const int DIAG_CV_4 = 48;
+const int DIAG_CV_4 = 36;
+const int DIAG_CV_3 = 40;
+const int DIAG_CV_2 = 44;
+const int DIAG_CV_1 = 48;
 
 const int CT3680_I2C_ADDR = 0x30; // FXCore I2C address
 const int DIAG_STREAM_RATE = 4000;// Module serial diagnostics data rate (bps). 10 bits/byte, 400 bytes/sec, 1 byte every 2.5ms

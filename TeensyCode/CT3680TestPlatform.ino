@@ -18,6 +18,8 @@ const char *TEST_PGM = "TEST_PGM";
 const char *TEST_SR = "TEST_SR";
 const char *TEST_TT = "TEST_TT";
 const char *TEST_CV = "TEST_CV";
+const char *TEST_AUD = "TEST_AUD";
+const char *TEST_MEM = "TEST_MEM";
 
 LiquidCrystal_I2C lcd(0x27, 20, 2);	// Configure LCD at I2S address 0x27, 16 chars, 2 lines
 //TODO: Should that be "16" instead of "20"??
@@ -180,19 +182,15 @@ void loop() {
 			verifyTapTempo();
 			sendResponse("Tap tempo verified");
 		} else if (strcmp(buffer, TEST_CV) == 0) {
-			analogWrite(PIN_CV_MIN, 255/2); // Write 50% of maximum 3.3v, e.g. 1.65v
-			delay(500); // PWM-to-analog converter takes a long time to settle on the target voltage
-
-			// Read CV back from the module data stream
-			struct CVData cvMin;
-			//getCV("CV_MIN", &cvMin);
-
-			// Return results
-			sendResponse("CV is: value(%i) percent(%f) volts(%f)", cvMin.values, cvMin.percent, cvMin.volts);
-			analogWrite(PIN_CV_MIN, 0); // Restore to 0.0v
-		}
-
-		else {
+			verifyVCSettings();
+			sendResponse("All CVs verified");
+		} else if (strcmp(buffer, TEST_AUD) == 0) {
+			verifyAudio();
+			sendResponse("Audio passthrough verified");
+		} else if (strcmp(buffer, TEST_MEM) == 0) {
+			verifyMemory();
+			sendResponse("Delay line verified");
+		} else {
 			sprintf(errorMsg, "Invalid command '%s'", buffer);
 			sendResponse("Invalid command");
 		}
